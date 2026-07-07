@@ -1,0 +1,6 @@
+google_keep.db
+*.db
+*.db-journal
+testing_versi_cli/target/
+target/
+.vscode/
