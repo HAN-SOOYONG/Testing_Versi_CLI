@@ -1,14 +1,21 @@
 package com.keep;
 
-public class note {
+public class Note {
     private int id;
     private String title;
     private String content;
     private String label;
     private String reminder;
 
+public Note(String title, String content) {
+    this(0, title, content, null, null); 
+}
 
-    public note(int id, String title, String content, String label, String reminder) {
+public Note(int id, String title, String content) {
+    this(id, title, content, null, null);
+}
+
+    public Note(int id, String title, String content, String label, String reminder) {
         this.id = id;
         this.title = title;
         this.content = content;
