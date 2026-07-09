@@ -1,15 +1,13 @@
 package com.keep;
 
 import org.junit.jupiter.api.Test;
-
+import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NoteTest {
-
+public class NoteTest{
     @Test
     public void test_membuat_hanya_juduldankonten() {
         Note note = new Note("test", "Menulis unit test");
-
         assertEquals(0, note.getId());
         assertEquals("test", note.getTitle());
         assertEquals("Menulis unit test", note.getContent());
@@ -20,11 +18,74 @@ public class NoteTest {
     @Test
     public void test_membuat_note_data_kengkap() {
         Note note = new Note(1, "Tugas", "coding", "Kerja", "Besok");
-
         assertEquals(1, note.getId());
         assertEquals("Tugas", note.getTitle());
         assertEquals("coding", note.getContent());
         assertEquals("Kerja", note.getLabel());
         assertEquals("Besok", note.getReminder());
+    }
+    
+    @Test
+    public void test_clone_catatan() {
+        Note original = new Note(1, "Belajar PIS", "Materi Testing", "Kuliah", "Hari ini");
+        Note clone = original.cloneNote();
+
+        assertNotSame(original, clone, "Objek clone harus memiliki referensi memori yang berbeda");
+        assertEquals(original.getTitle(), clone.getTitle(), "Judul harus sama");
+        assertEquals(original.getContent(), clone.getContent(), "Konten harus sama");
+    }
+
+    
+    @Test
+    public void test_manajemen_kotak_centang() {
+        Note note = new Note("Belanjaan", "Beli kebutuhan kost");
+        
+        // Tambah item kotak centang
+        note.addChecklistItem("Susu", false);
+        note.addChecklistItem("Roti", false);
+        assertEquals(2, note.getChecklistItems().size());
+
+        // Munculkan & Sembunyikan kotak centang
+        note.setShowCheckboxes(true);
+        assertTrue(note.isShowCheckboxes());
+        note.setShowCheckboxes(false);
+        assertFalse(note.isShowCheckboxes());
+
+        // Centang semua item
+        note.checkAllItems();
+        assertTrue(note.getChecklistStatus().get(0), "Item pertama harus tercentang");
+        assertTrue(note.getChecklistStatus().get(1), "Item kedua harus tercentang");
+    }
+
+    @Test
+    public void test_hapus_catatan() {
+        Note note = new Note("rahasia negara", "ga boleh tengok");
+        assertFalse(note.isDeleted(), "jangan dihapus");
+        
+        note.delete();
+        assertTrue(note.isDeleted(), "bagus udah kehapus");
+    }
+
+    @Test
+    public void test_aktifkan_tema_gelap() {
+        Note note = new Note("Catatan Nyaman", "Mata ga sakit");
+        note.setDarkModeEnabled(true);
+        assertTrue(note.isDarkModeEnabled());
+    }
+
+     @Test
+    public void test_aktifkan_tema_terang() {
+        Note note = new Note("Catatan Nyaman", "Mata ga sakit");
+        note.setLightModeEnabled(true);
+        assertTrue(note.isLightModeEnabled());
+    }
+
+    @Test
+    public void test_salin_ke_google_dokumen() {
+        Note note = new Note("Ide Bisnis", "peminjaman iphone");
+        String formatGoogleDocs = note.convertToGoogleDocsFormat();
+        assertNotNull(formatGoogleDocs);
+        assertTrue(formatGoogleDocs.contains("DOCS EXPORT"));
+        assertTrue(formatGoogleDocs.contains("Ide Bisnis"));
     }
 }

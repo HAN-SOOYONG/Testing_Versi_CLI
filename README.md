@@ -14,3 +14,15 @@ tc2 note dengan semua data
 Test set: com.keep.NoteTest
 -------------------------------------------------------------------------------
 Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in com.keep.NoteTest
+
+add fitur:
+tc3 : klon atau duplikat catatan
+tc4 : manajemen kotak centang (tambah & centang semua)
+tc5 : hapus catatan (ubah status isDeleted)
+tc6 : aktifkan tema gelap
+tc7 : aktifkan tema terang
+tc8 : salin catatan ke format google dokumen
+-------------------------------------------------------------------------------
+Test set: com.keep.NoteTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s - in com.keep.NoteTest
