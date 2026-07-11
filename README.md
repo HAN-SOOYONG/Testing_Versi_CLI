@@ -26,3 +26,11 @@ tc8 : salin catatan ke format google dokumen
 Test set: com.keep.NoteTest
 -------------------------------------------------------------------------------
 Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s - in com.keep.NoteTest
+
+mocking:
+tes awal (mocking):
+tc9 : ambil catatan lewat mock dao hasil ; data tiruan sukses keluar tanpa koneksi database asli
+-------------------------------------------------------------------------------
+Test set: com.keep.NoteTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.903 s - in com.keep.NoteTest

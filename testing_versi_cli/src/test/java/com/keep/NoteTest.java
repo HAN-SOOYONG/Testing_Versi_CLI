@@ -3,7 +3,9 @@ package com.keep;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+//ini unit test
 public class NoteTest{
     @Test
     public void test_membuat_hanya_juduldankonten() {
@@ -27,7 +29,7 @@ public class NoteTest{
     
     @Test
     public void test_clone_catatan() {
-        Note original = new Note(1, "Belajar PIS", "Materi Testing", "Kuliah", "Hari ini");
+        Note original = new Note(1, "Belajar TI", "Materi Testing", "Kuliah", "Hari ini");
         Note clone = original.cloneNote();
 
         assertNotSame(original, clone, "Objek clone harus memiliki referensi memori yang berbeda");
@@ -88,4 +90,24 @@ public class NoteTest{
         assertTrue(formatGoogleDocs.contains("DOCS EXPORT"));
         assertTrue(formatGoogleDocs.contains("Ide Bisnis"));
     }
-}
+
+//ini mocking
+
+@Test
+    public void test_ambil_catatan_lewat_mock_dao() {
+        NoteDAO noteDAOMock = mock(NoteDAO.class);
+        java.util.List<Note> daftarCatatanTiruan = new java.util.ArrayList<>();
+        daftarCatatanTiruan.add(new Note(67, "judulclone", "contentmocking"));
+
+        when(noteDAOMock.getAllNotes()).thenReturn(daftarCatatanTiruan);
+        java.util.List<Note> hasilUji = noteDAOMock.getAllNotes();
+
+        assertNotNull(hasilUji, "Data harusnya berhasil keluar");
+        assertEquals(1, hasilUji.size());
+        assertEquals("judulclone", hasilUji.get(0).getTitle(), "Judul harus sama kayak yang di mocking");
+        assertEquals("contentmocking", hasilUji.get(0).getContent(), "Konten harus sama kayak yang di mocking");
+        verify(noteDAOMock, times(1)).getAllNotes();
+}}
+
+
+
