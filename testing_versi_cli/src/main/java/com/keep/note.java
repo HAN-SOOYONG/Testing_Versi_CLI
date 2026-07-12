@@ -63,8 +63,15 @@ public class Note {
         }
     }
 
-    public void delete() { 
-        this.isDeleted = true; 
+    public void delete() {
+        this.isDeleted = true;
+    }
+
+    public void edit(String title, String content, String label, String reminder) {
+        this.title = title;
+        this.content = content;
+        this.label = label;
+        this.reminder = reminder;
     }
 
     public String convertToGoogleDocsFormat() {

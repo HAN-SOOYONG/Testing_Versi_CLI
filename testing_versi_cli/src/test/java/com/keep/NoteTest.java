@@ -1,9 +1,18 @@
 package com.keep;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import java.util.Arrays;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 //ini unit test
 public class NoteTest{
@@ -107,7 +116,32 @@ public class NoteTest{
         assertEquals("judulclone", hasilUji.get(0).getTitle(), "Judul harus sama kayak yang di mocking");
         assertEquals("contentmocking", hasilUji.get(0).getContent(), "Konten harus sama kayak yang di mocking");
         verify(noteDAOMock, times(1)).getAllNotes();
-}}
+    }
+
+    @Test
+    public void test_simpan_catatan_lewat_mock_dao() {
+        NoteDAO noteDAOMock = mock(NoteDAO.class);
+        Note note = new Note(88, "judulmock", "kontenmock");
+
+        doNothing().when(noteDAOMock).addNote(note);
+        noteDAOMock.addNote(note);
+
+        verify(noteDAOMock, times(1)).addNote(note);
+        verifyNoMoreInteractions(noteDAOMock);
+    }
+
+    @Test
+    public void test_edit_catatan_mengubah_judul_dan_konten() {
+        Note note = new Note(1, "Lama", "Isi lama", "Label", "Besok");
+
+        note.edit("Baru", "Isi baru", "Kerja", "Minggu depan");
+
+        assertEquals("Baru", note.getTitle());
+        assertEquals("Isi baru", note.getContent());
+        assertEquals("Kerja", note.getLabel());
+        assertEquals("Minggu depan", note.getReminder());
+    }
+}
 
 
 

@@ -34,3 +34,11 @@ tc9 : ambil catatan lewat mock dao hasil ; data tiruan sukses keluar tanpa konek
 Test set: com.keep.NoteTest
 -------------------------------------------------------------------------------
 Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.903 s - in com.keep.NoteTest
+
+update akhir mocking dan unit test
+tc10: edit note
+TC11: menguji bahwa kode  memang memanggil method DAO dengan benar
+-------------------------------------------------------------------------------
+Test set: com.keep.NoteTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.809 s - in com.keep.NoteTest
